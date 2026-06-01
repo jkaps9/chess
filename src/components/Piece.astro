@@ -4,13 +4,15 @@ interface Props {
   name: string;
   iconW: String;
   iconB: String;
+  movement: String;
 }
-const { name, iconW, iconB } = Astro.props;
+const { name, iconW, iconB, movement } = Astro.props;
 ---
 
 <div class="piece">
   <Icon name={iconB} />
   <h3>{name}</h3>
+  <p>{movement}</p>
 </div>
 
 <style lang="scss">
