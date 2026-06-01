@@ -74,13 +74,13 @@
 }
 
 body {
+  background-color: var(--color-background);
+  color: var(--color-body-text);
   font-family: $font-body;
   font-size: 1.125rem;
-  line-height: $line-height-base;
   font-weight: 500;
-  color: var(--color-body-text);
-  background-color: var(--color-background);
-  // overflow-x: hidden;
+  line-height: $line-height-base;
+  overflow-x: hidden;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
 }
@@ -164,6 +164,10 @@ button {
 
 p {
   max-width: 45ch;
+}
+
+svg {
+  color: initial; //stop SVG from inheriting color
 }
 
 /*~ ~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~>
