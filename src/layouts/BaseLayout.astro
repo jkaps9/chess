@@ -1,0 +1,94 @@
+---
+import Font from "astro/components/Font.astro";
+import "@styles/global.scss";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+const { pageTitle } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <!-- Fonts -->
+    <Font
+      cssVariable="--font-plus-jakarta-sans"
+      preload
+    />
+
+    <!-- Page Title -->
+    <title>{pageTitle}</title>
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="/chess/favicons/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/chess/favicons/favicon.svg"
+    />
+    <link
+      rel="shortcut icon"
+      href="/chess/favicons/favicon.ico"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/chess/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="manifest"
+      href="/chess/favicons/site.webmanifest"
+    />
+  </head>
+  <body>
+    <!-- Screen reader skip main nav -->
+    <a
+      class="skip"
+      aria-label="skip to main content"
+      href="#main"
+    >
+      Click To Skip To Main Content
+    </a>
+
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style lang="scss">
+  /* Skip to main content link - accessible to keyboard users and screen readers */
+  // https://www.a11y-collective.com/blog/skip-to-main-content/
+  .skip {
+    background-color: var(--color-primary);
+    color: var(--color-header);
+    left: -9999px;
+    opacity: 0; //Sets the link's opacity to 0, making it fully transparent and invisible.
+    padding: 1rem 1.5rem;
+    position: absolute; //Positions the link absolutely on the page, allowing it to be placed anywhere.
+    z-index: 999; //Sets a high z-index, ensuring that the link will be on top of other page elements if it becomes visible.
+
+    &:focus {
+      font-weight: 700;
+      left: 50%; // When the link receives focus (e.g., when a keyboard user tabs to it), it is repositioned horizontally to the centre of the screen.
+      opacity: 1; //The link's opacity is set to 1, making it fully visible.
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+
+      transform: translateX(
+        -50%
+      ); //This centres the link horizontally by moving it back to the left by 50% of its own width.
+    }
+  }
+</style>
