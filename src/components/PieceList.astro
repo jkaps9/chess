@@ -7,14 +7,30 @@ import data from "@data/data.json";
 <section id="pieces">
   <div class="container">
     <h2>Pieces</h2>
-    {
-      data.pieces.map((piece) => (
-        <Piece
-          name={piece.name}
-          icon={piece.icon}
-          movement={piece.movement}
-        />
-      ))
-    }
+    <div class="pieces">
+      {
+        data.pieces.map((piece) => (
+          <Piece
+            name={piece.name}
+            icon={piece.icon}
+            movement={piece.movement}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>
+
+<style lang="scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 1.2958rem + 3.0047vw, 4rem);
+  }
+
+  .pieces {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+  }
+</style>

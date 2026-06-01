@@ -28,7 +28,7 @@ if (!images[imagePath])
     alt=`${name}`
     width={64}
   />
-  <div class="text">
+  <div class="piece__text">
     <h3>{name}</h3>
     <p>Movement: {movement}</p>
   </div>
@@ -40,7 +40,13 @@ if (!images[imagePath])
 
     .piece {
       display: flex;
-      gap: 1rem;
+      gap: 2rem;
+
+      &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
     }
   </style>
 </div>
