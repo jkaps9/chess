@@ -7,6 +7,14 @@ import data from "@data/data.json";
 <section id="pieces">
   <div class="container">
     <h2>Pieces</h2>
-    {data.pieces.map((piece) => <Piece name={piece.name} />)}
+    {
+      data.pieces.map((piece) => (
+        <Piece
+          name={piece.name}
+          iconW={piece.iconW}
+          iconB={piece.iconB}
+        />
+      ))
+    }
   </div>
 </section>

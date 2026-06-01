@@ -1,8 +1,25 @@
 ---
+import { Icon } from "astro-icon/components";
 interface Props {
   name: string;
+  iconW: String;
+  iconB: String;
 }
-const { name } = Astro.props;
+const { name, iconW, iconB } = Astro.props;
 ---
 
-<h3>{name}</h3>
+<div class="piece">
+  <Icon name={iconB} />
+  <h3>{name}</h3>
+</div>
+
+<style lang="scss">
+  [data-icon] {
+    width: 24px;
+  }
+
+  .piece {
+    @include flex-center;
+    gap: 1rem;
+  }
+</style>
