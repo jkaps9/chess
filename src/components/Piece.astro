@@ -23,30 +23,31 @@ if (!images[imagePath])
 ---
 
 <div class="piece">
-  <Image
-    src={images[imagePath]()}
-    alt=`${name}`
-    width={64}
-  />
+  <div class="piece__image">
+    <Image
+      src={images[imagePath]()}
+      alt=`${name}`
+    />
+  </div>
   <div class="piece__text">
     <h3>{name}</h3>
     <p>Movement: {movement}</p>
   </div>
-
-  <style lang="scss">
-    [data-icon] {
-      width: 24px;
-    }
-
-    .piece {
-      display: flex;
-      gap: 2rem;
-
-      &__text {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-    }
-  </style>
 </div>
+
+<style lang="scss">
+  .piece {
+    display: flex;
+    gap: 2rem;
+
+    &__image {
+      max-width: 4rem;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+</style>
