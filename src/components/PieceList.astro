@@ -1,0 +1,12 @@
+---
+import Piece from "./Piece.astro";
+
+import data from "@data/data.json";
+---
+
+<section id="pieces">
+  <div class="container">
+    <h2>Pieces</h2>
+    {data.pieces.map((piece) => <Piece name={piece.name} />)}
+  </div>
+</section>

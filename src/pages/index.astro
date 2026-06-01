@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PieceList from "@components/PieceList.astro";
 
 const pageTitle = "Chess";
 ---
 
-<BaseLayout pageTitle={pageTitle} />
+<BaseLayout pageTitle={pageTitle}>
+  <PieceList />
+</BaseLayout>

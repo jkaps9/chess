@@ -1,0 +1,40 @@
+{
+  "pieces": [
+    {
+      "name": "Rook",
+      "icon-w": "rook-w",
+      "icon-b": "rook-b",
+      "movement": "straight lines"
+    },
+    {
+      "name": "Bishop",
+      "icon-w": "bishop-w",
+      "icon-b": "bishop-b",
+      "movement": "diagonally"
+    },
+    {
+      "name": "Queen",
+      "icon-w": "queen-w",
+      "icon-b": "queen-b",
+      "movement": "straight lines and diagonally"
+    },
+    {
+      "name": "King",
+      "icon-w": "king-w",
+      "icon-b": "king-b",
+      "movement": "straight lines and diagonally, one space per move"
+    },
+    {
+      "name": "Knight",
+      "icon-w": "knight-w",
+      "icon-b": "knight-b",
+      "movement": "L shape"
+    },
+    {
+      "name": "Pawn",
+      "icon-w": "pawn-w",
+      "icon-b": "pawn-b",
+      "movement": "forward only, capture diagonally"
+    }
+  ]
+}
