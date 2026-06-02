@@ -1,4 +1,280 @@
 {
+  "pieceTutorial": [
+    {
+      "name": "Rook",
+      "icon": "rook",
+      "movementId": "orthogonal",
+      "narrative": {
+        "movement": "The Rook is a powerhouse. It moves in straight lines—forward, backward, or side-to-side—for as many squares as it wants."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/3R4/8/8/8 w - - 0 1",
+          "highlightSquares": [
+            "d1",
+            "d2",
+            "d3",
+            "d5",
+            "d6",
+            "d7",
+            "d8",
+            "a4",
+            "b4",
+            "c4",
+            "e4",
+            "f4",
+            "g4",
+            "h4"
+          ],
+          "arrows": [
+            { "from": "d4", "to": "d8" },
+            { "from": "d4", "to": "d1" },
+            { "from": "d4", "to": "a4" },
+            { "from": "d4", "to": "h4" }
+          ],
+          "action": "highlight_and_arrow"
+        }
+      }
+    },
+    {
+      "name": "Bishop",
+      "icon": "bishop",
+      "movementId": "diagonal",
+      "narrative": {
+        "movement": "The Bishop glides diagonally. Because of this, a Bishop will always stay on the same color square it started on.",
+        "placement": "They sit right inside the Rooks. You get one for the light squares, and one for the dark squares."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/3B4/8/8/8 w - - 0 1",
+          "highlightSquares": [
+            "a1",
+            "b2",
+            "c3",
+            "e5",
+            "f6",
+            "g7",
+            "h8",
+            "a7",
+            "b6",
+            "c5",
+            "e3",
+            "f2",
+            "g1"
+          ],
+          "action": "highlight"
+        },
+        "step2_placement": {
+          "fen": "r1b2b1r/8/8/8/8/8/8/R1B2B1R w - - 0 1",
+          "highlightSquares": ["c1", "f1", "c8", "f8"],
+          "action": "place"
+        }
+      }
+    },
+    {
+      "name": "Queen",
+      "icon": "queen",
+      "movementId": "omni-directional",
+      "narrative": {
+        "movement": "The most powerful piece on the board. The Queen combines the powers of the Rook and the Bishop, moving in straight lines and diagonally in any direction.",
+        "placement": "The Queen always starts on the square matching her own color: White Queen on a light square, Black Queen on a dark square."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/3Q4/8/8/8 w - - 0 1",
+          "highlightSquares": [
+            "d1",
+            "d2",
+            "d3",
+            "d5",
+            "d6",
+            "d7",
+            "d8",
+            "a4",
+            "b4",
+            "c4",
+            "e4",
+            "f4",
+            "g4",
+            "h4",
+            "a1",
+            "b2",
+            "c3",
+            "e5",
+            "f6",
+            "g7",
+            "h8",
+            "a7",
+            "b6",
+            "c5",
+            "e3",
+            "f2",
+            "g1"
+          ],
+          "arrows": [
+            { "from": "d4", "to": "d8" },
+            { "from": "d4", "to": "d1" },
+            { "from": "d4", "to": "a4" },
+            { "from": "d4", "to": "h4" },
+            { "from": "d4", "to": "a1" },
+            { "from": "d4", "to": "h8" },
+            { "from": "d4", "to": "a7" },
+            { "from": "d4", "to": "g1" }
+          ],
+          "action": "highlight_and_arrow"
+        },
+        "step2_placement": {
+          "fen": "r1bq1b1r/8/8/8/8/8/8/R1BQ1B1R w - - 0 1",
+          "highlightSquares": ["d1", "d8"],
+          "action": "place"
+        }
+      }
+    },
+    {
+      "name": "King",
+      "icon": "king",
+      "movementId": "single-step",
+      "narrative": {
+        "movement": "The King is the most important piece, but moves slowly. He can step exactly one square in any direction.",
+        "placement": "The King sits right next to the Queen, completing the center of the royal back rank."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/3K4/8/8/8 w - - 0 1",
+          "highlightSquares": ["c3", "c4", "c5", "d3", "d5", "e3", "e4", "e5"],
+          "arrows": [
+            { "from": "d4", "to": "c5" },
+            { "from": "d4", "to": "d5" },
+            { "from": "d4", "to": "e5" },
+            { "from": "d4", "to": "c4" },
+            { "from": "d4", "to": "e4" },
+            { "from": "d4", "to": "c3" },
+            { "from": "d4", "to": "d3" },
+            { "from": "d4", "to": "e3" }
+          ],
+          "action": "highlight_and_arrow"
+        },
+        "step2_placement": {
+          "fen": "r1bqkb1r/8/8/8/8/8/8/R1BQKB1R w - - 0 1",
+          "highlightSquares": ["e1", "e8"],
+          "action": "place"
+        }
+      }
+    },
+    {
+      "name": "Knight",
+      "icon": "knight",
+      "movementId": "jumper",
+      "narrative": {
+        "movement": "The tricky Knight moves in an 'L' shape: two squares in one direction, and one square to the side. It is the only piece that can jump over others.",
+        "placement": "Knights sit between the Rooks and the Bishops, ready to leap into the center of the board."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/3N4/8/8/8 w - - 0 1",
+          "highlightSquares": ["c6", "e6", "b5", "f5", "b3", "f3", "c2", "e2"],
+          "arrows": [
+            { "from": "d4", "to": "c6" },
+            { "from": "d4", "to": "e6" },
+            { "from": "d4", "to": "b5" },
+            { "from": "d4", "to": "f5" },
+            { "from": "d4", "to": "b3" },
+            { "from": "d4", "to": "f3" },
+            { "from": "d4", "to": "c2" },
+            { "from": "d4", "to": "e2" }
+          ],
+          "action": "highlight_and_arrow"
+        },
+        "step2_placement": {
+          "fen": "rnbqkbnr/8/8/8/8/8/8/RNBQKBNR w KQkq - 0 1",
+          "highlightSquares": ["b1", "g1", "b8", "g8"],
+          "action": "place"
+        }
+      }
+    },
+    {
+      "name": "Pawn",
+      "icon": "pawn",
+      "movementId": "forward-march",
+      "narrative": {
+        "movement": "Pawns are the infantry. They only march forward. On their very first move, they can choose to jump two squares, but after that, they move one step at a time. They capture diagonally.",
+        "placement": "Eight pawns line up side-by-side in front of the major pieces, creating a defensive wall."
+      },
+      "vizTriggers": {
+        "step1_movement": {
+          "fen": "8/8/8/8/8/8/3P4/8 w - - 0 1",
+          "highlightSquares": ["d3", "d4"],
+          "arrows": [{ "from": "d2", "to": "d4" }],
+          "action": "highlight_and_arrow"
+        },
+        "step2_placement": {
+          "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          "highlightSquares": [
+            "a2",
+            "b2",
+            "c2",
+            "d2",
+            "e2",
+            "f2",
+            "g2",
+            "h2",
+            "a7",
+            "b7",
+            "c7",
+            "d7",
+            "e7",
+            "f7",
+            "g7",
+            "h7"
+          ],
+          "action": "place"
+        }
+      }
+    }
+  ],
+  "specialMoves": [
+    {
+      "name": "Castling (Kingside)",
+      "narrative": {
+        "setup": "Castling is the only time you can move two pieces at once. It tucks the King away into safety and brings the Rook into the action.",
+        "execution": "The King moves two squares toward the Rook, and the Rook hops over to the other side of the King."
+      },
+      "vizTriggers": {
+        "step1_setup": {
+          "fen": "4k3/8/8/8/8/8/8/4K2R w K - 0 1",
+          "highlightSquares": ["e1", "f1", "g1", "h1"],
+          "arrows": [
+            { "from": "e1", "to": "g1" },
+            { "from": "h1", "to": "f1" }
+          ],
+          "action": "highlight_and_arrow"
+        },
+        "step2_execution": {
+          "fen": "4k3/8/8/8/8/8/8/5RK1 b - - 1 1",
+          "action": "animate_move"
+        }
+      }
+    },
+    {
+      "name": "En Passant",
+      "narrative": {
+        "setup": "If a Pawn moves two squares forward from its starting position and lands exactly next to an enemy Pawn...",
+        "execution": "...the enemy Pawn can capture it as if it had only moved one square. But this must be done immediately on the very next turn."
+      },
+      "vizTriggers": {
+        "step1_setup": {
+          "fen": "8/8/8/3pP3/8/8/8/8 w - d6 0 2",
+          "highlightSquares": ["e5", "d5"],
+          "arrows": [{ "from": "e5", "to": "d6" }],
+          "action": "highlight_and_arrow"
+        },
+        "step2_execution": {
+          "fen": "8/8/3P4/8/8/8/8/8 b - - 0 2",
+          "action": "animate_capture_fade"
+        }
+      }
+    }
+  ],
   "pieces": [
     {
       "name": "Rook",
