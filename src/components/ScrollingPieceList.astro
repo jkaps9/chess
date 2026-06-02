@@ -1,0 +1,114 @@
+---
+import type { TutorialData } from "../types/chess";
+import GameBoard from "./GameBoard.astro";
+
+import rawChessData from "@data/tutorial.json";
+const chessData = rawChessData as TutorialData;
+---
+
+<section id="pieces">
+  <div class="container scrolly-container">
+    <article class="scroll-text">
+      <div
+        class="step"
+        data-step="Rook:step1_movement"
+      >
+        <h2>The Rook</h2>
+        <p>The Rook is a powerhouse. It moves in straight lines...</p>
+      </div>
+
+      <div
+        class="step"
+        data-step="Rook:step2_movement"
+      >
+        <p>Rooks start in the four corners of the board...</p>
+      </div>
+
+      <div
+        class="step"
+        data-step="Bishop:step1_movement"
+      >
+        <h2>The Bishop</h2>
+        <p>The Bishop glides diagonally...</p>
+      </div>
+    </article>
+
+    <aside class="sticky-visual">
+      <div id="chessboard-wrapper">
+        <GameBoard />
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script>
+  import { initChessScroller } from "../scripts/chessScroller";
+  import type { VizTrigger, TutorialData } from "../types/chess";
+
+  // Fetch/Import the data for the client side
+  const getTutorialData = async (): Promise<TutorialData> => {
+    const data = await import("../data/tutorial.json");
+    return data.default as TutorialData;
+  };
+
+  // Because of TypeScript, 'vizData' gives you perfect autocomplete here!
+  function handleBoardUpdate(vizData: VizTrigger) {
+    console.log("Triggering Action:", vizData.action);
+
+    // Switch statements are incredibly safe with literal types
+    switch (vizData.action) {
+      case "highlight_and_arrow":
+        // ts knows vizData.fen and vizData.arrows exist
+        // myChessboard.setPosition(vizData.fen);
+        // drawArrows(vizData.arrows);
+        break;
+      case "place":
+        // myChessboard.setPosition(vizData.fen);
+        break;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const data = await getTutorialData();
+    const cleanupScroller = initChessScroller(data, handleBoardUpdate);
+
+    document.addEventListener("astro:before-swap", cleanupScroller, {
+      once: true,
+    });
+  });
+</script>
+
+<style lang="scss">
+  .scrolly-container {
+    display: flex;
+    gap: 4rem;
+    position: relative;
+  }
+
+  .scroll-text {
+    flex: 1;
+    padding-bottom: 80vh; //extra padding so last step can reach the middle of the screen
+  }
+
+  .step {
+    @include flex-center;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 50vh;
+    padding: 2rem 0;
+  }
+
+  .sticky-visual {
+    @include flex-center;
+    flex: 1;
+    height: 90vh;
+    position: sticky;
+    top: 5vh;
+  }
+
+  #chessboard-wrapper {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1 / 1;
+  }
+</style>
