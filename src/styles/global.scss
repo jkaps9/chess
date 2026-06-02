@@ -69,7 +69,6 @@
 @media (prefers-reduced-motion: no-preference) {
   html {
     interpolate-size: allow-keywords;
-    overflow-x: hidden;
   }
 }
 
@@ -80,7 +79,6 @@ body {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: $line-height-base;
-  overflow-x: hidden;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
 }
@@ -174,7 +172,6 @@ svg {
 <~~        Global Styles       ~~>
 <~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~ ~*/
 body {
-  overflow-x: hidden;
   padding-block: clamp(1.5rem, 0.9286rem + 1.1905vw, 2rem);
 }
 
