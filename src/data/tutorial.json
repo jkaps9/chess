@@ -5,7 +5,8 @@
       "icon": "rook",
       "movementId": "orthogonal",
       "narrative": {
-        "movement": "The Rook is a powerhouse. It moves in straight lines—forward, backward, or side-to-side—for as many squares as it wants."
+        "movement": "The Rook is a powerhouse. It moves in straight lines—forward, backward, or side-to-side—for as many squares as it wants.",
+        "placement": "Rooks start in the four corners of the board, acting as the foundation of your defense."
       },
       "vizTriggers": {
         "step1_movement": {

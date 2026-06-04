@@ -580,15 +580,9 @@ const chessData = rawChessData as TutorialData;
         </g>
       </symbol>
     </svg>
-    <article class="scroll-text">
-      <div
-        class="step"
-        data-step="Rook:step1_movement"
-      >
-        <h2>The Rook</h2>
-        <p>The Rook is a powerhouse. It moves in straight lines...</p>
-      </div>
 
+    <article class="scroll-text">
+      <!--
       <div
         class="step"
         data-step="Rook:step2_placement"
@@ -602,7 +596,19 @@ const chessData = rawChessData as TutorialData;
       >
         <h2>The Bishop</h2>
         <p>The Bishop glides diagonally...</p>
-      </div>
+      </div> -->
+
+      {
+        chessData.pieceTutorial.map((item) => (
+          <div class="step" data-step={`${item.name}:step1_movement`}>
+            <h2>The {item.name}</h2>
+            <p>{item.narrative.movement}</p>
+          </div>
+          <div class="step" data-step={`${item.name}:step2_placement`}>
+            <p>{item.narrative.placement}</p>
+          </div>
+        ))
+      }
     </article>
 
     <aside class="sticky-visual">
