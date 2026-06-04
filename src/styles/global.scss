@@ -196,6 +196,7 @@ h6 {
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: 0;
+  margin-block-end: 0.5em;
 }
 
 @each $tag, $clamp-value in $fluid-headers {
