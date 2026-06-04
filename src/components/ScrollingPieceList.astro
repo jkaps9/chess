@@ -707,10 +707,15 @@ const chessData = rawChessData as TutorialData;
 
   .sticky-visual {
     @include flex-center;
+    background-color: var(--color-background);
     flex: 1;
-    height: 90vh;
+    height: 45vh;
     position: sticky;
     top: 5vh;
+
+    @include bp(lg) {
+      height: 90vh;
+    }
   }
 
   #chessboard-wrapper {
