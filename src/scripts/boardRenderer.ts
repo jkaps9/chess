@@ -1,4 +1,5 @@
 import type { Arrow } from "../types/chess";
+import { getSquareTopLeft, getArrowVector } from "../utils/chessMath";
 
 const SQUARE_SIZE = 400 / 8; // Assuming a 400x400 viewBox
 
@@ -69,30 +70,23 @@ export function drawHighlights(squares: string[]) {
   if (!highlightLayer) return;
 
   squares.forEach((square) => {
-    // 1. Find the base square we generated earlier (e.g., "square-d4")
-    const baseSquare = document.getElementById(`square-${square}`);
+    // 1. Calculate the exact top-left corner using pure math
+    const position = getSquareTopLeft(square, SQUARE_SIZE);
 
-    if (baseSquare) {
-      // 2. Grab its exact pixel coordinates
-      const x = baseSquare.getAttribute("x") || "0";
-      const y = baseSquare.getAttribute("y") || "0";
+    // 2. Create the highlight overlay
+    const highlightRect = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "rect",
+    );
+    highlightRect.setAttribute("x", position.x.toString());
+    highlightRect.setAttribute("y", position.y.toString());
+    highlightRect.setAttribute("width", SQUARE_SIZE.toString());
+    highlightRect.setAttribute("height", SQUARE_SIZE.toString());
 
-      // 3. Create the highlight overlay
-      const highlightRect = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect",
-      );
-      highlightRect.setAttribute("x", x);
-      highlightRect.setAttribute("y", y);
-      highlightRect.setAttribute("width", SQUARE_SIZE.toString());
-      highlightRect.setAttribute("height", SQUARE_SIZE.toString());
+    highlightRect.classList.add("highlight-overlay");
 
-      // Add a CSS class so we can style it easily
-      highlightRect.classList.add("highlight-overlay");
-
-      // 4. Add it to the highlight layer
-      highlightLayer.appendChild(highlightRect);
-    }
+    // 3. Add it to the highlight layer
+    highlightLayer.appendChild(highlightRect);
   });
 }
 
@@ -100,44 +94,16 @@ export function drawArrows(arrows: Arrow[]) {
   const arrowLayer = document.getElementById("board-arrows");
   if (!arrowLayer) return;
 
-  // The distance from the center to start the arrow.
-  // SQUARE_SIZE / 2 is the exact edge of the square.
-  // 0.35 leaves a nice gap in the middle for your SVG piece icon.
-  const START_OFFSET = SQUARE_SIZE * 0.45;
-
-  // Optional: A smaller offset for the end of the line so the arrowhead doesn't cross dead center
-  const END_OFFSET = SQUARE_SIZE * 0.15;
-
   arrows.forEach((arrow) => {
-    // 1. Get the true center coordinates of the 'From' square
-    const fromCol = arrow.from.charCodeAt(0) - 97;
-    const fromRow = 8 - parseInt(arrow.from[1], 10);
-    const startX = fromCol * SQUARE_SIZE + SQUARE_SIZE / 2;
-    const startY = fromRow * SQUARE_SIZE + SQUARE_SIZE / 2;
+    // 1. Let the math utility do the heavy lifting
+    const vector = getArrowVector(arrow.from, arrow.to, SQUARE_SIZE);
 
-    // 2. Get the true center coordinates of the 'To' square
-    const toCol = arrow.to.charCodeAt(0) - 97;
-    const toRow = 8 - parseInt(arrow.to[1], 10);
-    const targetX = toCol * SQUARE_SIZE + SQUARE_SIZE / 2;
-    const targetY = toRow * SQUARE_SIZE + SQUARE_SIZE / 2;
-
-    // 3. Vector Math: Calculate the angle between the two centers in radians
-    const angle = Math.atan2(targetY - startY, targetX - startX);
-
-    // 4. Shift X1 and Y1 outward along that angle
-    const x1 = startX + START_OFFSET * Math.cos(angle);
-    const y1 = startY + START_OFFSET * Math.sin(angle);
-
-    // 5. Shift X2 and Y2 inward along that angle (so the arrowhead stops slightly short)
-    const x2 = targetX - END_OFFSET * Math.cos(angle);
-    const y2 = targetY - END_OFFSET * Math.sin(angle);
-
-    // 6. Create the SVG line using the new offset coordinates
+    // 2. Just draw the line
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", x1.toString());
-    line.setAttribute("y1", y1.toString());
-    line.setAttribute("x2", x2.toString());
-    line.setAttribute("y2", y2.toString());
+    line.setAttribute("x1", vector.x1.toString());
+    line.setAttribute("y1", vector.y1.toString());
+    line.setAttribute("x2", vector.x2.toString());
+    line.setAttribute("y2", vector.y2.toString());
 
     line.classList.add("vector-arrow");
     line.setAttribute("marker-end", "url(#arrowhead)");
