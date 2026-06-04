@@ -65,7 +65,35 @@ export function clearVisuals() {
 }
 // 3. Highlight and Arrow Functions
 export function drawHighlights(squares: string[]) {
-  // Logic to append <rect> elements to #board-highlights
+  const highlightLayer = document.getElementById("board-highlights");
+  if (!highlightLayer) return;
+
+  squares.forEach((square) => {
+    // 1. Find the base square we generated earlier (e.g., "square-d4")
+    const baseSquare = document.getElementById(`square-${square}`);
+
+    if (baseSquare) {
+      // 2. Grab its exact pixel coordinates
+      const x = baseSquare.getAttribute("x") || "0";
+      const y = baseSquare.getAttribute("y") || "0";
+
+      // 3. Create the highlight overlay
+      const highlightRect = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect",
+      );
+      highlightRect.setAttribute("x", x);
+      highlightRect.setAttribute("y", y);
+      highlightRect.setAttribute("width", SQUARE_SIZE.toString());
+      highlightRect.setAttribute("height", SQUARE_SIZE.toString());
+
+      // Add a CSS class so we can style it easily
+      highlightRect.classList.add("highlight-overlay");
+
+      // 4. Add it to the highlight layer
+      highlightLayer.appendChild(highlightRect);
+    }
+  });
 }
 
 export function drawArrows(arrows: Arrow[]) {
