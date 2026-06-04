@@ -68,7 +68,13 @@
             "f2",
             "g1"
           ],
-          "action": "highlight"
+          "arrows": [
+            { "from": "d4", "to": "a7" },
+            { "from": "d4", "to": "a1" },
+            { "from": "d4", "to": "g1" },
+            { "from": "d4", "to": "h8" }
+          ],
+          "action": "highlight_and_arrow"
         },
         "step2_placement": {
           "fen": "r1b2b1r/8/8/8/8/8/8/R1B2B1R w - - 0 1",
@@ -210,7 +216,10 @@
         "step1_movement": {
           "fen": "8/8/8/8/8/8/3P4/8 w - - 0 1",
           "highlightSquares": ["d3", "d4"],
-          "arrows": [{ "from": "d2", "to": "d4" }],
+          "arrows": [
+            { "from": "d2", "to": "d4" },
+            { "from": "d2", "to": "d3" }
+          ],
           "action": "highlight_and_arrow"
         },
         "step2_placement": {
