@@ -165,7 +165,26 @@ p {
 }
 
 svg {
-  color: initial; //stop SVG from inheriting color
+  //stop SVG from inheriting color
+  color: initial;
+}
+
+.chess-square {
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+
+.square-light {
+  fill: var(--color-body-text-light);
+}
+
+.square-dark {
+  fill: var(--color-header-text);
+}
+
+.chess-square.highlight-active {
+  fill: #f6e05e;
 }
 
 /*~ ~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~>

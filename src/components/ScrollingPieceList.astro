@@ -126,6 +126,7 @@ const chessData = rawChessData as TutorialData;
     clearVisuals,
     drawHighlights,
     drawArrows,
+    drawGrid,
   } from "../scripts/boardRenderer";
   import type { VizTrigger, TutorialData } from "../types/chess";
 
@@ -156,6 +157,7 @@ const chessData = rawChessData as TutorialData;
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
+    drawGrid();
     const data = await getTutorialData();
     const cleanupScroller = initChessScroller(data, handleBoardUpdate);
 
@@ -194,8 +196,12 @@ const chessData = rawChessData as TutorialData;
   }
 
   #chessboard-wrapper {
-    width: 100%;
-    max-width: 600px;
     aspect-ratio: 1 / 1;
+    border: 1px solid rgba(9, 30, 66, 0.25);
+    box-shadow:
+      rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    max-width: 600px;
+    width: 100%;
   }
 </style>
