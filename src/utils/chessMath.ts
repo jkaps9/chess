@@ -44,7 +44,7 @@ export function getArrowVector(
 
   // The offset distances
   const START_OFFSET = squareSize * 0.35;
-  const END_OFFSET = squareSize * 0.15;
+  const END_OFFSET = squareSize * 0;
 
   // Trigonometry to find the angle
   const angle = Math.atan2(target.y - start.y, target.x - start.x);
