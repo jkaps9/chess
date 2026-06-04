@@ -582,22 +582,6 @@ const chessData = rawChessData as TutorialData;
     </svg>
 
     <article class="scroll-text">
-      <!--
-      <div
-        class="step"
-        data-step="Rook:step2_placement"
-      >
-        <p>Rooks start in the four corners of the board...</p>
-      </div>
-
-      <div
-        class="step"
-        data-step="Bishop:step1_movement"
-      >
-        <h2>The Bishop</h2>
-        <p>The Bishop glides diagonally...</p>
-      </div> -->
-
       {
         chessData.pieceTutorial.map((item) => (
           <div class="step" data-step={`${item.name}:step1_movement`}>
@@ -697,13 +681,20 @@ const chessData = rawChessData as TutorialData;
 <style lang="scss">
   .scrolly-container {
     display: flex;
+    flex-direction: column-reverse;
     gap: 4rem;
     position: relative;
+    @include bp(lg) {
+      flex-direction: row;
+    }
   }
 
   .scroll-text {
     flex: 1;
-    padding-bottom: 80vh; //extra padding so last step can reach the middle of the screen
+    padding-bottom: 20vh; //extra padding so last step can reach the middle of the screen
+    @include bp(lg) {
+      padding-bottom: 80vh;
+    }
   }
 
   .step {
