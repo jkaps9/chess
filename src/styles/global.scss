@@ -184,7 +184,19 @@ svg {
 }
 
 .highlight-overlay {
-  fill: #f6e05e;
+  fill: rgba(246, 224, 94, 0.5);
+  stroke: #d69e2e;
+  stroke-width: 2px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /*~ ~~~~~~~~~~~~~~~~~~~~~~~~~~ ~~>
