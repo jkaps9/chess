@@ -97,7 +97,53 @@ export function drawHighlights(squares: string[]) {
 }
 
 export function drawArrows(arrows: Arrow[]) {
-  // Logic to append <line> elements to #board-arrows
+  const arrowLayer = document.getElementById("board-arrows");
+  if (!arrowLayer) return;
+
+  // The distance from the center to start the arrow.
+  // SQUARE_SIZE / 2 is the exact edge of the square.
+  // 0.35 leaves a nice gap in the middle for your SVG piece icon.
+  const START_OFFSET = SQUARE_SIZE * 0.45;
+
+  // Optional: A smaller offset for the end of the line so the arrowhead doesn't cross dead center
+  const END_OFFSET = SQUARE_SIZE * 0.15;
+
+  arrows.forEach((arrow) => {
+    // 1. Get the true center coordinates of the 'From' square
+    const fromCol = arrow.from.charCodeAt(0) - 97;
+    const fromRow = 8 - parseInt(arrow.from[1], 10);
+    const startX = fromCol * SQUARE_SIZE + SQUARE_SIZE / 2;
+    const startY = fromRow * SQUARE_SIZE + SQUARE_SIZE / 2;
+
+    // 2. Get the true center coordinates of the 'To' square
+    const toCol = arrow.to.charCodeAt(0) - 97;
+    const toRow = 8 - parseInt(arrow.to[1], 10);
+    const targetX = toCol * SQUARE_SIZE + SQUARE_SIZE / 2;
+    const targetY = toRow * SQUARE_SIZE + SQUARE_SIZE / 2;
+
+    // 3. Vector Math: Calculate the angle between the two centers in radians
+    const angle = Math.atan2(targetY - startY, targetX - startX);
+
+    // 4. Shift X1 and Y1 outward along that angle
+    const x1 = startX + START_OFFSET * Math.cos(angle);
+    const y1 = startY + START_OFFSET * Math.sin(angle);
+
+    // 5. Shift X2 and Y2 inward along that angle (so the arrowhead stops slightly short)
+    const x2 = targetX - END_OFFSET * Math.cos(angle);
+    const y2 = targetY - END_OFFSET * Math.sin(angle);
+
+    // 6. Create the SVG line using the new offset coordinates
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", x1.toString());
+    line.setAttribute("y1", y1.toString());
+    line.setAttribute("x2", x2.toString());
+    line.setAttribute("y2", y2.toString());
+
+    line.classList.add("vector-arrow");
+    line.setAttribute("marker-end", "url(#arrowhead)");
+
+    arrowLayer.appendChild(line);
+  });
 }
 
 // Helper to map chess.js single letters to your sprite IDs
