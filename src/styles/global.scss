@@ -289,18 +289,18 @@ h6 {
 
 .highlight-overlay {
   fill: rgba(246, 224, 94, 0.5);
+  opacity: 0;
   stroke: #d69e2e;
   stroke-width: 2px;
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.3s ease-out forwards 1s;
 }
 
 .vector-arrow {
   stroke: #d69e2e;
   stroke-width: 4px;
-
   stroke-linecap: round;
 
-  animation: fadeIn 0.3s ease-out forwards;
+  animation: fadeIn 0.3s ease-out forwards 1.4s;
   opacity: 0;
 }
 
