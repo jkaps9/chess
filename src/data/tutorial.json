@@ -33,6 +33,11 @@
             { "from": "d4", "to": "h4" }
           ],
           "action": "highlight_and_arrow"
+        },
+        "step2_placement": {
+          "fen": "r6r/8/8/8/8/8/8/R6R w - - 0 1",
+          "highlightSquares": ["a1", "h1", "a8", "h8"],
+          "action": "place"
         }
       }
     },
